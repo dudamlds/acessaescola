@@ -1,33 +1,29 @@
 *{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:Inter, system-ui, Arial;background:#0b1220;color:#fff;padding:18px}
-.app{max-width:1200px;margin:0 auto;background:#fff;color:#0b1220;border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(2,6,23,.25)}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.brand h1{margin:0;font-size:1.25rem}
-.subtitle{margin:0;font-size:.9rem;color:#6b7280}
-.auth-area{display:flex;align-items:center;gap:8px}
-.auth-area input, .auth-area select{padding:6px;border-radius:6px;border:1px solid #ddd}
-.grid{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-top:14px}
-nav{background:#071a2b;color:#fff;padding:14px;border-radius:10px}
-.nav-list{display:flex;flex-direction:column;gap:8px}
-.nav-list button{background:transparent;border:0;color:#fff;padding:10px;text-align:left;border-radius:8px;cursor:pointer}
-.nav-list button:hover{background:rgba(255,255,255,.04)}
-.status{margin-top:12px;color:#9aa4b2}
-.notif{margin-top:6px}
-main{min-height:480px}
-.panel{background:#f8fafc;padding:12px;border-radius:10px;color:#0b1220;margin-bottom:12px}
-.card{background:#fff;border-radius:8px;padding:12px;margin-bottom:12px;box-shadow:0 6px 14px rgba(11,18,32,.04)}
-label{display:block;font-size:.9rem;margin-top:8px;color:#374151}
-input, select, textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #d1d5db;font-size:0.95rem}
-textarea{min-height:80px}
-.actions{display:flex;justify-content:flex-end;margin-top:10px;gap:8px}
-button{cursor:pointer;padding:8px 12px;border-radius:8px;border:0;background:#0f62fe;color:#fff}
-button[aria-pressed="true"]{background:#0847c6}
-.muted{color:#6b7280;font-size:.95rem}
+body{margin:0;font-family:Arial;background:#0b1220;color:#fff;padding:20px}
+.app{background:#fff;color:#000;border-radius:10px;padding:20px;max-width:1200px;margin:auto}
+
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+
+.auth-area{display:flex;gap:10px}
 .hidden{display:none}
-.table-responsive{overflow:auto}
-table{width:100%;border-collapse:collapse;margin-top:12px}
-th,td{padding:8px;border-bottom:1px solid #e6eef6;text-align:left}
-th{background:#f3f7fb}
-.row{display:flex;gap:8px}
-@media (max-width:880px){.grid{grid-template-columns:1fr}.auth-area{flex-direction:column;align-items:flex-end}}
+
+.grid{display:grid;grid-template-columns:260px 1fr;gap:20px}
+
+nav{background:#071a2b;color:#fff;padding:15px;border-radius:10px}
+nav button{background:transparent;color:#fff;border:1px solid #fff;padding:10px;width:100%;margin-bottom:6px;border-radius:6px;cursor:pointer}
+nav button:hover{background:rgba(255,255,255,.1)}
+
+.panel{background:#f4f7fb;padding:20px;border-radius:10px}
+.card{background:#fff;padding:15px;border-radius:8px;margin-top:10px}
+
+label{display:block;margin-top:10px;font-size:.9rem}
+input,select,textarea{width:100%;padding:8px;margin-top:4px;border-radius:6px;border:1px solid #ccc}
+
+.link-btn{
+  background:none;
+  border:none;
+  color:#0f62fe;
+  text-decoration:underline;
+  cursor:pointer;
+  margin-top:6px;
+}

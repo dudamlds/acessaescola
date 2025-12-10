@@ -1,247 +1,190 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Sistema de Acessibilidade</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="app">
-    <header>
-      <h1>Sistema de Acessibilidade — Protótipo</h1>
-      <div class="controls">
-        <label for="roleSelect">Entrar como</label>
-        <select id="roleSelect">
-          <option value="pedagogico">Setor Pedagógico</option>
-          <option value="professor">Professor</option>
-          <option value="coordenacao">Coordenação</option>
-        </select>
-      </div>
-    </header>
-
-    <section class="grid">
-      <nav>
-        <h2>Menu</h2>
-        <button class="tab" data-panel="students">Cadastrar Estudante</button>
-        <button class="tab" data-panel="interventions">Registrar Intervenção</button>
-        <button class="tab" data-panel="reports">Gerar Relatório</button>
-        <button class="tab" data-panel="settings">Configurações</button>
-      </nav>
-
-      <main>
-        <section id="students" class="panel">
-          <h3>Cadastrar Estudante</h3>
-          <form id="studentForm">
-            <label>Nome completo</label>
-            <input id="studentName" required>
-
-            <label>Matrícula / ID</label>
-            <input id="studentId" required>
-
-            <label>Turma</label>
-            <input id="studentClass" required>
-
-            <label>Necessidades</label>
-            <textarea id="needs"></textarea>
-
-            <label>Adaptações</label>
-            <textarea id="accommodations"></textarea>
-
-            <button type="submit">Salvar</button>
-          </form>
-
-          <div id="studentsListArea"></div>
-        </section>
-
-        <section id="interventions" class="panel hidden">
-          <h3>Registrar Intervenção</h3>
-          <form id="interventionForm">
-            <label>Aluno</label>
-            <select id="ivStudent"></select>
-
-            <label>Data</label>
-            <input id="ivDate" type="date">
-
-            <label>Descrição</label>
-            <textarea id="ivDescription"></textarea>
-
-            <label>Resultado</label>
-            <textarea id="ivOutcome"></textarea>
-
-            <button type="submit">Registrar</button>
-          </form>
-
-          <div id="interventionsListArea"></div>
-        </section>
-
-        <section id="reports" class="panel hidden">
-          <h3>Gerar Relatório</h3>
-          <form id="reportForm">
-<!doctype html>
-<html lang="pt-BR">
-<head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Sistema de Acessibilidade — Protótipo</title>
+  <title>Sistema de Acessibilidade</title>
   <link rel="stylesheet" href="styles.css"/>
 </head>
+
 <body>
-  <div class="app" role="application" aria-label="Sistema de Acessibilidade">
-    <header>
-      <div class="brand">
-        <h1>Sistema de Acessibilidade</h1>
-        <p class="subtitle">Apoio ao acompanhamento de estudantes com necessidades específicas</p>
+<div class="app">
+
+  <header>
+    <h1>Sistema de Acessibilidade</h1>
+
+    <!-- LOGIN / REGISTRO -->
+    <div class="auth-area">
+
+      <!-- LOGIN -->
+      <div id="loginBox">
+        <input id="email" type="email" placeholder="email" />
+        <input id="password" type="password" placeholder="senha" />
+
+        <select id="loginRole">
+          <option value="estudante">Estudante</option>
+          <option value="professor">Professor</option>
+          <option value="pedagogico">Setor Pedagógico</option>
+          <option value="coordenacao">Coordenação</option>
+        </select>
+
+        <button id="loginBtn">Entrar</button>
+        <button id="openRegisterBtn" class="link-btn">Criar conta</button>
       </div>
 
-      <div class="auth-area" id="authArea">
-        <div id="loginBox">
-          <input id="email" type="email" placeholder="email" aria-label="email"/>
-          <input id="password" type="password" placeholder="senha" aria-label="senha"/>
-          <select id="loginRole" aria-label="perfil">
-            <option value="pedagogico">Setor Pedagógico</option>
-            <option value="professor">Professor</option>
-            <option value="estudante">Estudante</option>
-            <option value="coordenacao">Coordenação</option>
-          </select>
-          <button id="loginBtn">Entrar</button>
-        </div>
-        <div id="userBox" class="hidden" aria-live="polite">
-          <span id="userBadge"></span>
-          <button id="logoutBtn">Sair</button>
-        </div>
+      <!-- USUÁRIO LOGADO -->
+      <div id="userBox" class="hidden">
+        <span id="userBadge"></span>
+        <button id="logoutBtn">Sair</button>
       </div>
-    </header>
 
-    <section class="grid">
-      <nav aria-label="Navegação principal">
-        <h2>Menu</h2>
-        <div class="nav-list">
-          <button class="tab" data-panel="panel-students">Cadastrar Estudante</button>
-          <button class="tab" data-panel="panel-interventions">Registrar Intervenção</button>
-          <button class="tab" data-panel="panel-perceptions">Percepções (estudante)</button>
-          <button class="tab" data-panel="panel-reports">Gerar Relatório</button>
-          <button class="tab" data-panel="panel-files">Anexos</button>
-          <button class="tab" data-panel="panel-settings">Configurações</button>
+    </div>
+  </header>
+
+
+
+  <!-- FORMULÁRIO DE CRIAÇÃO DE CONTA -->
+  <section id="registerBox" class="panel hidden">
+    <h3>Criar Conta</h3>
+    <form id="registerForm" class="card">
+
+      <label>Email</label>
+      <input id="regEmail" type="email" required>
+
+      <label>Senha</label>
+      <input id="regPassword" type="password" required>
+
+      <label>Nome</label>
+      <input id="regName" type="text" required>
+
+      <label>Papel</label>
+      <select id="regRole">
+        <option value="estudante">Estudante</option>
+        <option value="professor">Professor</option>
+        <option value="pedagogico">Setor Pedagógico</option>
+        <option value="coordenacao">Coordenação</option>
+      </select>
+
+      <label id="regStudentIdLabel" class="hidden">ID do Estudante</label>
+      <input id="regStudentId" class="hidden">
+
+      <button type="submit">Cadastrar</button>
+      <button id="cancelRegisterBtn" type="button">Cancelar</button>
+
+    </form>
+  </section>
+
+
+
+
+
+  <section class="grid">
+
+    <!-- MENU -->
+    <nav>
+      <h2>Menu</h2>
+
+      <button class="tab" data-panel="panel-students">Cadastrar Estudante</button>
+      <button class="tab" data-panel="panel-interventions">Registrar Intervenção</button>
+      <button class="tab" data-panel="panel-perceptions">Percepções</button>
+      <button class="tab" data-panel="panel-reports">Relatórios</button>
+      <button class="tab" data-panel="panel-files">Anexos</button>
+      <button class="tab" data-panel="panel-settings">Configurações</button>
+
+      <hr>
+      <p>Usuário: <span id="statusRole">Nenhum</span></p>
+    </nav>
+
+
+
+    <!-- ÁREA PRINCIPAL -->
+    <main>
+
+      <!-- PAINÉIS ORIGINAIS -->
+      <section id="panel-students" class="panel hidden">
+        <h3>Cadastrar Estudante</h3>
+        <form id="studentForm" class="card">
+          <label>Nome</label><input id="studentName">
+          <label>ID</label><input id="studentId">
+          <label>Turma</label><input id="studentClass">
+          <label>Necessidades</label><textarea id="needs"></textarea>
+          <label>Adaptações</label><textarea id="accommodations"></textarea>
+          <button type="submit">Salvar</button>
+        </form>
+
+        <div class="card">
+          <h4>Lista</h4>
+          <div id="studentsListArea"></div>
         </div>
+      </section>
 
-        <hr/>
-        <div class="status">Usuário: <strong id="statusRole">Anônimo</strong></div>
-        <div class="notif">Notificações: <span id="notifCount">0</span></div>
-      </nav>
 
-      <main>
-        <!-- Cadastrar Estudante -->
-        <section id="panel-students" class="panel" role="region" aria-labelledby="panel-students-title">
-          <h3 id="panel-students-title">Cadastrar Estudante</h3>
-          <form id="studentForm" class="card">
-            <label>Nome completo<input id="studentName" required/></label>
-            <label>Matrícula / ID<input id="studentId" required/></label>
-            <label>Turma / Ano<input id="studentClass" required/></label>
-            <label>Necessidades / Diagnóstico<textarea id="needs" placeholder="Ex.: TDAH, deficiência visual, TEA"></textarea></label>
-            <label>Adaptações pedagógicas<textarea id="accommodations" placeholder="Ex.: tempo adicional"></textarea></label>
-            <label>Anexar laudo (opcional)<input id="studentFile" type="file" accept=".pdf,.jpg,.png,.doc,.docx" /></label>
-            <div class="actions">
-              <button type="submit" id="saveStudentBtn">Salvar estudante</button>
-            </div>
-          </form>
+      <section id="panel-interventions" class="panel hidden">
+        <h3>Registrar Intervenção</h3>
+        <form id="interventionForm" class="card">
+          <label>Aluno</label><select id="ivStudent"></select>
+          <label>Data</label><input id="ivDate" type="date">
+          <label>Descrição</label><textarea id="ivDescription"></textarea>
+          <label>Resultado</label><textarea id="ivOutcome"></textarea>
+          <button type="submit">Registrar</button>
+        </form>
 
-          <div class="card">
-            <h4>Lista de Estudantes</h4>
-            <div id="studentsListArea" tabindex="0"></div>
-          </div>
-        </section>
+        <div class="card">
+          <h4>Registros</h4>
+          <div id="interventionsListArea"></div>
+        </div>
+      </section>
 
-        <!-- Registrar Intervenção -->
-        <section id="panel-interventions" class="panel hidden" role="region" aria-labelledby="panel-interventions-title">
-          <h3 id="panel-interventions-title">Registrar Intervenção</h3>
-          <form id="interventionForm" class="card">
-            <label>Aluno<select id="ivStudent" required></select></label>
-            <label>Data<input id="ivDate" type="date" required/></label>
-            <label>Descrição<textarea id="ivDescription" required></textarea></label>
-            <label>Resultado<textarea id="ivOutcome"></textarea></label>
-            <label>Prazo para revisão (opcional)<input id="ivDueDate" type="date"/></label>
-            <div class="actions">
-              <button type="submit">Registrar intervenção</button>
-            </div>
-          </form>
 
-          <div class="card">
-            <h4>Últimas intervenções</h4>
-            <div id="interventionsListArea" tabindex="0"></div>
-          </div>
-        </section>
 
-        <!-- Percepções (estudante) -->
-        <section id="panel-perceptions" class="panel hidden" role="region" aria-labelledby="panel-perceptions-title">
-          <h3 id="panel-perceptions-title">Submeter Percepção (Estudante)</h3>
-          <p class="muted">Estudantes podem registrar como se sentiram sobre atividades realizadas.</p>
-          <form id="perceptionForm" class="card">
-            <label>Aluno (se logado como estudante, seleciona automaticamente)<select id="pStudent"></select></label>
-            <label>Data<input id="pDate" type="date" required/></label>
-            <label>Percepção<textarea id="pText" required></textarea></label>
-            <div class="actions">
-              <button type="submit">Enviar percepção</button>
-            </div>
-          </form>
+      <section id="panel-perceptions" class="panel hidden">
+        <h3>Percepções do Estudante</h3>
+        <form id="perceptionForm" class="card">
+          <label>Aluno</label><select id="pStudent"></select>
+          <label>Data</label><input id="pDate" type="date">
+          <label>Percepção</label><textarea id="pText"></textarea>
+          <button type="submit">Enviar</button>
+        </form>
 
-          <div class="card">
-            <h4>Percepções recentes</h4>
-            <div id="perceptionsListArea"></div>
-          </div>
-        </section>
+        <div class="card"><div id="perceptionsListArea"></div></div>
+      </section>
 
-        <!-- Relatórios -->
-        <section id="panel-reports" class="panel hidden" role="region" aria-labelledby="panel-reports-title">
-          <h3 id="panel-reports-title">Gerar Relatório</h3>
-          <form id="reportForm" class="card">
-            <label>Aluno (opcional)<select id="rStudent"><option value="">Todos</option></select></label>
-            <label>Turma (opcional)<input id="rClass" placeholder="ex.: 6A"/></label>
-            <div class="row">
-              <label>Data inicial<input id="rFrom" type="date"/></label>
-              <label>Data final<input id="rTo" type="date"/></label>
-            </div>
-            <div class="actions">
-              <button type="button" id="generateReport">Gerar</button>
-              <button type="button" id="exportCsv">Exportar CSV</button>
-            </div>
-          </form>
 
-          <div class="card">
-            <h4>Relatório</h4>
-            <div id="reportArea"></div>
-          </div>
-        </section>
 
-        <!-- Anexos -->
-        <section id="panel-files" class="panel hidden" role="region" aria-labelledby="panel-files-title">
-          <h3 id="panel-files-title">Anexos e Documentos</h3>
-          <div class="card">
-            <p class="muted">Todos os arquivos anexados ficam armazenados localmente (base64) neste protótipo.</p>
-            <div id="filesArea"></div>
-          </div>
-        </section>
 
-        <!-- Configurações -->
-        <section id="panel-settings" class="panel hidden" role="region" aria-labelledby="panel-settings-title">
-          <h3 id="panel-settings-title">Configurações</h3>
-          <div class="card">
-            <button id="clearData">Limpar dados locais (apagar tudo)</button>
-            <p class="muted">Autenticação neste protótipo é simulação — em produção, implemente backend com hashing e autenticação segura.</p>
-          </div>
-          <div class="card">
-            <h4>Logs de auditoria</h4>
-            <div id="logsArea"></div>
-          </div>
-        </section>
-      </main>
-    </section>
+      <section id="panel-reports" class="panel hidden">
+        <h3>Relatórios</h3>
+        <form id="reportForm" class="card">
+          <label>Aluno</label><select id="rStudent"></select>
+          <label>Turma</label><input id="rClass">
+          <label>Data início</label><input id="rFrom" type="date">
+          <label>Data fim</label><input id="rTo" type="date">
+          <button id="generateReport" type="button">Gerar</button>
+        </form>
 
-    <footer>
-      <div>Protótipo — WCAG-aware (básico) • v0.2</div>
-    </footer>
-  </div>
+        <div class="card" id="reportArea"></div>
+      </section>
 
-  <script src="app.js"></script>
+
+
+      <section id="panel-files" class="panel hidden">
+        <h3>Anexos</h3>
+        <div id="filesArea"></div>
+      </section>
+
+
+
+      <section id="panel-settings" class="panel hidden">
+        <h3>Configurações</h3>
+        <button id="clearData">Limpar dados</button>
+        <div id="logsArea"></div>
+      </section>
+
+    </main>
+  </section>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
