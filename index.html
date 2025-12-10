@@ -78,28 +78,168 @@
         <section id="reports" class="panel hidden">
           <h3>Gerar Relatório</h3>
           <form id="reportForm">
-            <label>Aluno</label>
-            <select id="rStudent"><option value="">Todos</option></select>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sistema de Acessibilidade — Protótipo</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="app" role="application" aria-label="Sistema de Acessibilidade">
+    <header>
+      <div class="brand">
+        <h1>Sistema de Acessibilidade</h1>
+        <p class="subtitle">Apoio ao acompanhamento de estudantes com necessidades específicas</p>
+      </div>
 
-            <label>Data inicial</label>
-            <input id="rFrom" type="date">
+      <div class="auth-area" id="authArea">
+        <div id="loginBox">
+          <input id="email" type="email" placeholder="email" aria-label="email"/>
+          <input id="password" type="password" placeholder="senha" aria-label="senha"/>
+          <select id="loginRole" aria-label="perfil">
+            <option value="pedagogico">Setor Pedagógico</option>
+            <option value="professor">Professor</option>
+            <option value="estudante">Estudante</option>
+            <option value="coordenacao">Coordenação</option>
+          </select>
+          <button id="loginBtn">Entrar</button>
+        </div>
+        <div id="userBox" class="hidden" aria-live="polite">
+          <span id="userBadge"></span>
+          <button id="logoutBtn">Sair</button>
+        </div>
+      </div>
+    </header>
 
-            <label>Data final</label>
-            <input id="rTo" type="date">
+    <section class="grid">
+      <nav aria-label="Navegação principal">
+        <h2>Menu</h2>
+        <div class="nav-list">
+          <button class="tab" data-panel="panel-students">Cadastrar Estudante</button>
+          <button class="tab" data-panel="panel-interventions">Registrar Intervenção</button>
+          <button class="tab" data-panel="panel-perceptions">Percepções (estudante)</button>
+          <button class="tab" data-panel="panel-reports">Gerar Relatório</button>
+          <button class="tab" data-panel="panel-files">Anexos</button>
+          <button class="tab" data-panel="panel-settings">Configurações</button>
+        </div>
 
-            <button type="button" id="generateReport">Gerar</button>
-            <button type="button" id="exportCsv">Exportar CSV</button>
+        <hr/>
+        <div class="status">Usuário: <strong id="statusRole">Anônimo</strong></div>
+        <div class="notif">Notificações: <span id="notifCount">0</span></div>
+      </nav>
+
+      <main>
+        <!-- Cadastrar Estudante -->
+        <section id="panel-students" class="panel" role="region" aria-labelledby="panel-students-title">
+          <h3 id="panel-students-title">Cadastrar Estudante</h3>
+          <form id="studentForm" class="card">
+            <label>Nome completo<input id="studentName" required/></label>
+            <label>Matrícula / ID<input id="studentId" required/></label>
+            <label>Turma / Ano<input id="studentClass" required/></label>
+            <label>Necessidades / Diagnóstico<textarea id="needs" placeholder="Ex.: TDAH, deficiência visual, TEA"></textarea></label>
+            <label>Adaptações pedagógicas<textarea id="accommodations" placeholder="Ex.: tempo adicional"></textarea></label>
+            <label>Anexar laudo (opcional)<input id="studentFile" type="file" accept=".pdf,.jpg,.png,.doc,.docx" /></label>
+            <div class="actions">
+              <button type="submit" id="saveStudentBtn">Salvar estudante</button>
+            </div>
           </form>
 
-          <div id="reportArea"></div>
+          <div class="card">
+            <h4>Lista de Estudantes</h4>
+            <div id="studentsListArea" tabindex="0"></div>
+          </div>
         </section>
 
-        <section id="settings" class="panel hidden">
-          <h3>Configurações</h3>
-          <button id="clearData">Limpar dados</button>
+        <!-- Registrar Intervenção -->
+        <section id="panel-interventions" class="panel hidden" role="region" aria-labelledby="panel-interventions-title">
+          <h3 id="panel-interventions-title">Registrar Intervenção</h3>
+          <form id="interventionForm" class="card">
+            <label>Aluno<select id="ivStudent" required></select></label>
+            <label>Data<input id="ivDate" type="date" required/></label>
+            <label>Descrição<textarea id="ivDescription" required></textarea></label>
+            <label>Resultado<textarea id="ivOutcome"></textarea></label>
+            <label>Prazo para revisão (opcional)<input id="ivDueDate" type="date"/></label>
+            <div class="actions">
+              <button type="submit">Registrar intervenção</button>
+            </div>
+          </form>
+
+          <div class="card">
+            <h4>Últimas intervenções</h4>
+            <div id="interventionsListArea" tabindex="0"></div>
+          </div>
+        </section>
+
+        <!-- Percepções (estudante) -->
+        <section id="panel-perceptions" class="panel hidden" role="region" aria-labelledby="panel-perceptions-title">
+          <h3 id="panel-perceptions-title">Submeter Percepção (Estudante)</h3>
+          <p class="muted">Estudantes podem registrar como se sentiram sobre atividades realizadas.</p>
+          <form id="perceptionForm" class="card">
+            <label>Aluno (se logado como estudante, seleciona automaticamente)<select id="pStudent"></select></label>
+            <label>Data<input id="pDate" type="date" required/></label>
+            <label>Percepção<textarea id="pText" required></textarea></label>
+            <div class="actions">
+              <button type="submit">Enviar percepção</button>
+            </div>
+          </form>
+
+          <div class="card">
+            <h4>Percepções recentes</h4>
+            <div id="perceptionsListArea"></div>
+          </div>
+        </section>
+
+        <!-- Relatórios -->
+        <section id="panel-reports" class="panel hidden" role="region" aria-labelledby="panel-reports-title">
+          <h3 id="panel-reports-title">Gerar Relatório</h3>
+          <form id="reportForm" class="card">
+            <label>Aluno (opcional)<select id="rStudent"><option value="">Todos</option></select></label>
+            <label>Turma (opcional)<input id="rClass" placeholder="ex.: 6A"/></label>
+            <div class="row">
+              <label>Data inicial<input id="rFrom" type="date"/></label>
+              <label>Data final<input id="rTo" type="date"/></label>
+            </div>
+            <div class="actions">
+              <button type="button" id="generateReport">Gerar</button>
+              <button type="button" id="exportCsv">Exportar CSV</button>
+            </div>
+          </form>
+
+          <div class="card">
+            <h4>Relatório</h4>
+            <div id="reportArea"></div>
+          </div>
+        </section>
+
+        <!-- Anexos -->
+        <section id="panel-files" class="panel hidden" role="region" aria-labelledby="panel-files-title">
+          <h3 id="panel-files-title">Anexos e Documentos</h3>
+          <div class="card">
+            <p class="muted">Todos os arquivos anexados ficam armazenados localmente (base64) neste protótipo.</p>
+            <div id="filesArea"></div>
+          </div>
+        </section>
+
+        <!-- Configurações -->
+        <section id="panel-settings" class="panel hidden" role="region" aria-labelledby="panel-settings-title">
+          <h3 id="panel-settings-title">Configurações</h3>
+          <div class="card">
+            <button id="clearData">Limpar dados locais (apagar tudo)</button>
+            <p class="muted">Autenticação neste protótipo é simulação — em produção, implemente backend com hashing e autenticação segura.</p>
+          </div>
+          <div class="card">
+            <h4>Logs de auditoria</h4>
+            <div id="logsArea"></div>
+          </div>
         </section>
       </main>
     </section>
+
+    <footer>
+      <div>Protótipo — WCAG-aware (básico) • v0.2</div>
+    </footer>
   </div>
 
   <script src="app.js"></script>
