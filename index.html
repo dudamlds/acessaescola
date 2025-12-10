@@ -1,110 +1,107 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sistema de Acessibilidade Escolar</title>
-  <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Portal de acessibilidade para escolas: registre necessidades, recursos, guias e ferramentas adaptáveis." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sistema de Acessibilidade</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- link para pular conteúdo -->
-  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <div class="app">
+    <header>
+      <h1>Sistema de Acessibilidade — Protótipo</h1>
+      <div class="controls">
+        <label for="roleSelect">Entrar como</label>
+        <select id="roleSelect">
+          <option value="pedagogico">Setor Pedagógico</option>
+          <option value="professor">Professor</option>
+          <option value="coordenacao">Coordenação</option>
+        </select>
+      </div>
+    </header>
 
-  <header class="site-header" role="banner">
-    <div class="header-inner">
-      <h1>Sistema de Acessibilidade Escolar</h1>
-      <nav aria-label="Navegação principal">
-        <ul class="main-nav">
-          <li><a href="#about">Sobre</a></li>
-          <li><a href="#resources">Recursos</a></li>
-          <li><a href="#report">Registrar necessidades</a></li>
-          <li><a href="#contact">Contato</a></li>
-        </ul>
+    <section class="grid">
+      <nav>
+        <h2>Menu</h2>
+        <button class="tab" data-panel="students">Cadastrar Estudante</button>
+        <button class="tab" data-panel="interventions">Registrar Intervenção</button>
+        <button class="tab" data-panel="reports">Gerar Relatório</button>
+        <button class="tab" data-panel="settings">Configurações</button>
       </nav>
 
-      <div class="access-controls" aria-hidden="false">
-        <button id="increase-font" aria-label="Aumentar fonte">A+</button>
-        <button id="decrease-font" aria-label="Diminuir fonte">A-</button>
-        <button id="toggle-contrast" aria-pressed="false" aria-label="Alternar alto contraste">Alto contraste</button>
-        <button id="read-btn" aria-label="Ler conteúdo">Ler</button>
-      </div>
-    </div>
-  </header>
+      <main>
+        <section id="students" class="panel">
+          <h3>Cadastrar Estudante</h3>
+          <form id="studentForm">
+            <label>Nome completo</label>
+            <input id="studentName" required>
 
-  <main id="main" tabindex="-1" role="main">
-    <section id="hero" class="hero" aria-labelledby="hero-title">
-      <h2 id="hero-title">Bem-vindes — Acessibilidade para todos os estudantes</h2>
-      <p class="lead">Ferramentas, orientações e um formulário para mapear necessidades específicas na sua escola.</p>
+            <label>Matrícula / ID</label>
+            <input id="studentId" required>
+
+            <label>Turma</label>
+            <input id="studentClass" required>
+
+            <label>Necessidades</label>
+            <textarea id="needs"></textarea>
+
+            <label>Adaptações</label>
+            <textarea id="accommodations"></textarea>
+
+            <button type="submit">Salvar</button>
+          </form>
+
+          <div id="studentsListArea"></div>
+        </section>
+
+        <section id="interventions" class="panel hidden">
+          <h3>Registrar Intervenção</h3>
+          <form id="interventionForm">
+            <label>Aluno</label>
+            <select id="ivStudent"></select>
+
+            <label>Data</label>
+            <input id="ivDate" type="date">
+
+            <label>Descrição</label>
+            <textarea id="ivDescription"></textarea>
+
+            <label>Resultado</label>
+            <textarea id="ivOutcome"></textarea>
+
+            <button type="submit">Registrar</button>
+          </form>
+
+          <div id="interventionsListArea"></div>
+        </section>
+
+        <section id="reports" class="panel hidden">
+          <h3>Gerar Relatório</h3>
+          <form id="reportForm">
+            <label>Aluno</label>
+            <select id="rStudent"><option value="">Todos</option></select>
+
+            <label>Data inicial</label>
+            <input id="rFrom" type="date">
+
+            <label>Data final</label>
+            <input id="rTo" type="date">
+
+            <button type="button" id="generateReport">Gerar</button>
+            <button type="button" id="exportCsv">Exportar CSV</button>
+          </form>
+
+          <div id="reportArea"></div>
+        </section>
+
+        <section id="settings" class="panel hidden">
+          <h3>Configurações</h3>
+          <button id="clearData">Limpar dados</button>
+        </section>
+      </main>
     </section>
+  </div>
 
-    <section id="about" class="panel" aria-labelledby="about-title">
-      <h3 id="about-title">Sobre o sistema</h3>
-      <p>Este portal ajuda coordenadores, professores e famílias a registrar e gerir adaptações para estudantes com necessidades específicas (deficiências, transtornos de aprendizagem, necessidades sensoriais, mobilidade reduzida etc.).</p>
-      <ul>
-        <li>Mapeamento de necessidades</li>
-        <li>Recursos pedagógicos adaptados</li>
-        <li>Boas práticas e guias</li>
-      </ul>
-    </section>
-
-    <section id="resources" class="panel" aria-labelledby="resources-title">
-      <h3 id="resources-title">Recursos rápidos</h3>
-
-      <article aria-labelledby="res1">
-        <h4 id="res1">Guia: Adaptações em sala</h4>
-        <p>Lista de sugestões simples: testes em formato diferenciado, tempo extra, materiais táteis, tecnologia assistiva.</p>
-      </article>
-
-      <article aria-labelledby="res2">
-        <h4 id="res2">Checklist para reuniões com família</h4>
-        <p>Pontos a discutir: rotina, supports necessários, contato de emergência, acompanhamento pedagógico.</p>
-      </article>
-    </section>
-
-    <section id="report" class="panel" aria-labelledby="report-title">
-      <h3 id="report-title">Registrar necessidades do estudante</h3>
-      <form id="needs-form" aria-describedby="form-desc">
-        <p id="form-desc">Preencha esse formulário para que a equipe possa identificar adaptações necessárias.</p>
-
-        <label for="student-name">Nome do estudante</label>
-        <input id="student-name" name="studentName" type="text" required />
-
-        <label for="grade">Série / Turma</label>
-        <input id="grade" name="grade" type="text" required />
-
-        <label for="needs">Descreva as necessidades / adaptações</label>
-        <textarea id="needs" name="needs" rows="5" required></textarea>
-
-        <fieldset>
-          <legend>Tipos (marque os aplicáveis)</legend>
-          <label><input type="checkbox" name="type" value="visual" /> Visual</label>
-          <label><input type="checkbox" name="type" value="auditivo" /> Auditivo</label>
-          <label><input type="checkbox" name="type" value="fisico" /> Físico / Mobilidade</label>
-          <label><input type="checkbox" name="type" value="aprendizagem" /> Dificuldade de aprendizagem</label>
-          <label><input type="checkbox" name="type" value="sensoriais" /> Sensoriais</label>
-        </fieldset>
-
-        <label for="contact">Contato (responsável / professor)</label>
-        <input id="contact" name="contact" type="text" />
-
-        <button type="submit">Enviar registro</button>
-      </form>
-
-      <div id="form-feedback" aria-live="polite"></div>
-    </section>
-
-    <section id="contact" class="panel" aria-labelledby="contact-title">
-      <h3 id="contact-title">Contato e suporte</h3>
-      <p>Email: <a href="mailto:acessibilidade@escola.org">acessibilidade@escola.org</a></p>
-      <p>Telefone: <a href="tel:+550000000000">00 0000-0000</a></p>
-    </section>
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <p>© <span id="year"></span> — Sistema de Acessibilidade Escolar</p>
-  </footer>
-
-  <script src="app.js" defer></script>
+  <script src="app.js"></script>
 </body>
 </html>
