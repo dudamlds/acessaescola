@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sistema de Acessibilidade Escolar</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Portal de acessibilidade para escolas: registre necessidades, recursos, guias e ferramentas adaptáveis." />
+</head>
+<body>
+  <!-- link para pular conteúdo -->
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <h1>Sistema de Acessibilidade Escolar</h1>
+      <nav aria-label="Navegação principal">
+        <ul class="main-nav">
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#resources">Recursos</a></li>
+          <li><a href="#report">Registrar necessidades</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="access-controls" aria-hidden="false">
+        <button id="increase-font" aria-label="Aumentar fonte">A+</button>
+        <button id="decrease-font" aria-label="Diminuir fonte">A-</button>
+        <button id="toggle-contrast" aria-pressed="false" aria-label="Alternar alto contraste">Alto contraste</button>
+        <button id="read-btn" aria-label="Ler conteúdo">Ler</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1" role="main">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Bem-vindes — Acessibilidade para todos os estudantes</h2>
+      <p class="lead">Ferramentas, orientações e um formulário para mapear necessidades específicas na sua escola.</p>
+    </section>
+
+    <section id="about" class="panel" aria-labelledby="about-title">
+      <h3 id="about-title">Sobre o sistema</h3>
+      <p>Este portal ajuda coordenadores, professores e famílias a registrar e gerir adaptações para estudantes com necessidades específicas (deficiências, transtornos de aprendizagem, necessidades sensoriais, mobilidade reduzida etc.).</p>
+      <ul>
+        <li>Mapeamento de necessidades</li>
+        <li>Recursos pedagógicos adaptados</li>
+        <li>Boas práticas e guias</li>
+      </ul>
+    </section>
+
+    <section id="resources" class="panel" aria-labelledby="resources-title">
+      <h3 id="resources-title">Recursos rápidos</h3>
+
+      <article aria-labelledby="res1">
+        <h4 id="res1">Guia: Adaptações em sala</h4>
+        <p>Lista de sugestões simples: testes em formato diferenciado, tempo extra, materiais táteis, tecnologia assistiva.</p>
+      </article>
+
+      <article aria-labelledby="res2">
+        <h4 id="res2">Checklist para reuniões com família</h4>
+        <p>Pontos a discutir: rotina, supports necessários, contato de emergência, acompanhamento pedagógico.</p>
+      </article>
+    </section>
+
+    <section id="report" class="panel" aria-labelledby="report-title">
+      <h3 id="report-title">Registrar necessidades do estudante</h3>
+      <form id="needs-form" aria-describedby="form-desc">
+        <p id="form-desc">Preencha esse formulário para que a equipe possa identificar adaptações necessárias.</p>
+
+        <label for="student-name">Nome do estudante</label>
+        <input id="student-name" name="studentName" type="text" required />
+
+        <label for="grade">Série / Turma</label>
+        <input id="grade" name="grade" type="text" required />
+
+        <label for="needs">Descreva as necessidades / adaptações</label>
+        <textarea id="needs" name="needs" rows="5" required></textarea>
+
+        <fieldset>
+          <legend>Tipos (marque os aplicáveis)</legend>
+          <label><input type="checkbox" name="type" value="visual" /> Visual</label>
+          <label><input type="checkbox" name="type" value="auditivo" /> Auditivo</label>
+          <label><input type="checkbox" name="type" value="fisico" /> Físico / Mobilidade</label>
+          <label><input type="checkbox" name="type" value="aprendizagem" /> Dificuldade de aprendizagem</label>
+          <label><input type="checkbox" name="type" value="sensoriais" /> Sensoriais</label>
+        </fieldset>
+
+        <label for="contact">Contato (responsável / professor)</label>
+        <input id="contact" name="contact" type="text" />
+
+        <button type="submit">Enviar registro</button>
+      </form>
+
+      <div id="form-feedback" aria-live="polite"></div>
+    </section>
+
+    <section id="contact" class="panel" aria-labelledby="contact-title">
+      <h3 id="contact-title">Contato e suporte</h3>
+      <p>Email: <a href="mailto:acessibilidade@escola.org">acessibilidade@escola.org</a></p>
+      <p>Telefone: <a href="tel:+550000000000">00 0000-0000</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> — Sistema de Acessibilidade Escolar</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
